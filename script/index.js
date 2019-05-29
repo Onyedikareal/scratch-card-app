@@ -76,6 +76,19 @@ function postCardData(url, data, myFunct) {
     $('tbody').append("<tr id='update'></tr>")
     $('tbody #update').append(td5,td6,td7);
 }
+function validityCheck(cardDateString){
+    var currentDate = new Date();
+    currentDate = currentDate.toUTCString();
+    currentDate = Date.parse(currentDate);
+
+    cardDate = Date.parse(cardDateString)
+    value = +currentDate >= +cardDate
+    if(value){
+        $('#validity').addClass('invalid');
+    }else{
+        $('#validity').addClass('valid');
+    }
+}
 
   
 $('#generate').click(function(){
