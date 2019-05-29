@@ -52,6 +52,25 @@ function postCardData(url, data, myFunct) {
   }
 
   
+  
+$('#generate').click(function(){
+$('#table').removeClass('d-none');
+$('tbody').text('');
+$('thead').text('');
+var cardObj = cardObjGenerator();
+ var data = JSON.stringify(cardObj);
+postCardData('http://localhost:3000/card', data, generateCard);
+var cardObject
+function generateCard(cardString){
+    cardObject = JSON.parse(cardString);
+
+    fillTable(cardObject);
+    var cardDate = cardObject.validity.toString();
+    validityCheck(cardDate);
+
+}
+
+});
 
 
 
