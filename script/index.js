@@ -2,7 +2,7 @@ function pinGenerator(){
     var rechargePin;
     rechargePin = (Math.random()+'').substring(2,10) + (Math.random()+'').substring(2,10);
     
-    return parseInt(rechargePin);
+    return rechargePin;
 }
 
 function serialGenerator(){
@@ -20,9 +20,18 @@ function dateGenerator(){
     var month = dayMonthGenerator(12, 0);
     var dayOfMonth = dayMonthGenerator(31,0);
     var d  = new Date(2019,month, dayOfMonth);
-    console.log(month);
-    console.log(dayOfMonth)
-    return d;
+    return d.toUTCString();
+}
+
+function cardObjGenerator(){
+    var pin = pinGenerator();
+    var sn = serialGenerator();
+    var date = dateGenerator(); 
+    return {
+        pin: pin,
+        sn: sn,
+        validity: date
+    };
 }
 
 
