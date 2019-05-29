@@ -11,4 +11,9 @@ function serialGenerator(){
     return serial;
 }
 
+function dayMonthGenerator(max,min){
+var random = Math.floor(Math.random() * (+max - +min) + +max); 
+return random;
+}
+
 
