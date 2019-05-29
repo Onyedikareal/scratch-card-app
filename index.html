@@ -12,22 +12,22 @@
                 <h1 class="jumbotron bg-transparent border border-white">Welcome to my scratch card app</h1>
                 <div class="row bj">
                 <div class="col-2"></div>
-                <button class="btn bg-info text-white col-4">Generate Pin</button>
-                <button class="btn bg-info text-white col-4">Get all</button>
+                <button class="btn bg-info text-white col-4" id="generate">Generate Pin</button>
+                <button class="btn bg-info text-white col-4" id="getall">Get all</button>
                 </div>
                 <div class="row bj">
                     <div class="col-3"></div>
-                <form action="get" class="col-6">
+                <form class="col-6">
                     <div class="form-group ">
-                            <input class="form-control " name="search" type="text" placeholder="search with card SN">
+                            <input class="form-control " name="search" type="text" placeholder="search with card SN" id="findsn">
                             <small class="form-text">please use card serial number</small>
-                            <button class="btn rounded-pill bg-warning text-white d-inline">find card</button>
+                            <button class="btn rounded-pill bg-warning text-white" id="getone">find card</button>
                     </div>   
                 </form>
                 </div>
                 <div class="container" id="card-detail">
 
-                   <table>
+                   <table class="d-none" id="table">
                        <thead>
                             <tr>
                                 <th >No</th>
@@ -37,30 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th rowspan="2" scope="rowgroup" >1</td>
-                                <td >2356788956677834</td>
-                                <td >SN45678989</td>
-                                <td >valid</th>
-                                
-                            </tr>
-                            <tr id="update">
-                                <td scope = "row">&nbsp;</td>
-                                <td> <button class="btn bg-success">update</button></td>
-                                <td><button class="btn bg-danger ">trash</button></td>
-                            </tr>
-                            <tr>
-                                    <th rowspan="2" scope="rowgroup" >1</td>
-                                    <td >2356788956677834</td>
-                                    <td >SN45678989</td>
-                                    <td >valid</th>
-                                    
-                                </tr>
-                                <tr id="update">
-                                    <td scope = "row">&nbsp;</td>
-                                    <td> <button class="btn bg-success update">update</button></td>
-                                    <td><button class="btn bg-danger trash ">trash</button></td>
-                                </tr>
+                           
                         </tbody>
                    </table>
                         
