@@ -1,0 +1,47 @@
+#container{
+    margin-top: 20px;
+    padding: 10px;
+    padding-top: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+h1{
+    margin: 20px;
+}
+button {
+    margin: 20px;
+    padding: 10px;
+}
+.btn{
+    margin: 10px;
+}
+#card-details{
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+}
+.bj{
+    margin: auto;
+    text-align: center
+}
+
+table{
+    border-collapse: collapse;
+    border: 1px solid  #868e96;
+    letter-spacing: 1px;
+    font-size: 0.83m
+}
+
+td, th{
+    border: 1px solid #868e96;
+    padding: 10px 20px;
+
+}
+#update td{
+    border: none;
+}
+
