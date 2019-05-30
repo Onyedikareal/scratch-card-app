@@ -212,6 +212,7 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     //modal.find('.modal-title').text()
     modal.find('#serialmodal').val(recipient)
   })
+  
 
   $('#confirm').click(function(){
     var id = button.val()
