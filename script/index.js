@@ -170,7 +170,20 @@ $('#find').blur(function(){
     
 })
 
+$('#getone').click(function(){
+    $('#table').removeClass('d-none');
+    $('tbody').text('');
+    $('thead').text('');
+    var data;
+   
+    postCardData('http://localhost:3000/card/?q='+ input, data,'GET', getone);
 
+    function getone(cards){
+        cards = JSON.parse(cards);
+        generateCard(cards[0])
+        
+    }
+})
 
 
 
