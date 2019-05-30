@@ -8,6 +8,8 @@ function pinGenerator(){
     return rechargePin;
 }
 
+
+
 function serialGenerator(){
     var serial;
     serial = 'SN' + (Math.random()+'').substring(2,10)
@@ -55,6 +57,16 @@ function postCardData(url, data, method, myFunct) {
     }
   }
 
+  function generateCard(cardObject){
+    
+    console.log(cardObject);
+
+    fillTable(cardObject);
+    var cardDate = cardObject.validity.toString();
+    var id = cardObject.id
+    validityCheck(cardDate, id);
+
+}
   
   
 $('#generate').click(function(){
@@ -63,17 +75,14 @@ $('#generate').click(function(){
     $('thead').text('');
     var cardObj = cardObjGenerator();
     var data = JSON.stringify(cardObj);
-    postCardData('http://localhost:3000/card', data,'POST', generateCard);
-    var cardObject;
-    function generateCard(cardString){
-        cardObject = JSON.parse(cardString);
+    postCardData('http://localhost:3000/card', data,'POST', generate);
 
-        fillTable(cardObject);
-        var cardDate = cardObject.validity.toString();
-        var id = cardObject.id
-        validityCheck(cardDate, id);
-
+    
+    function generate(cardString){
+        var cardString = JSON.parse(cardString);
+        generateCard(cardString);
     }
+    
 
 });
 
@@ -154,6 +163,12 @@ function tableAllCards(cardObj){
       validityCheck(cardD, i);
     }
 }
+
+var input;
+$('#find').blur(function(){
+    input = $(this).val();
+    
+})
 
 
 
