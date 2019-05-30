@@ -55,7 +55,29 @@ function postCardData(url, data, method, myFunct) {
     }
   }
 
-  function fillTable(cardObj){
+  
+  
+$('#generate').click(function(){
+    $('#table').removeClass('d-none');
+    $('#validity').removeClass('invalid valid')
+    $('thead').text('');
+    var cardObj = cardObjGenerator();
+    var data = JSON.stringify(cardObj);
+    postCardData('http://localhost:3000/card', data,'POST', generateCard);
+    var cardObject;
+    function generateCard(cardString){
+        cardObject = JSON.parse(cardString);
+
+        fillTable(cardObject);
+        var cardDate = cardObject.validity.toString();
+        var id = cardObject.id
+        validityCheck(cardDate, id);
+
+    }
+
+});
+
+function fillTable(cardObj){
 
     
     $('thead').append(`<tr>
@@ -94,26 +116,6 @@ function validityCheck(cardDateString, i){
     }
 }
 
-  
-$('#generate').click(function(){
-    $('#table').removeClass('d-none');
-    $('#validity').removeClass('invalid valid')
-    $('thead').text('');
-    var cardObj = cardObjGenerator();
-    var data = JSON.stringify(cardObj);
-    postCardData('http://localhost:3000/card', data,'POST', generateCard);
-    var cardObject;
-    function generateCard(cardString){
-        cardObject = JSON.parse(cardString);
-
-        fillTable(cardObject);
-        var cardDate = cardObject.validity.toString();
-        var id = cardObject.id
-        validityCheck(cardDate, id);
-
-    }
-
-});
 
 
 
@@ -129,6 +131,29 @@ $('#getall').click(function(){
         tableAllCards(allCards);
     }
 })
+
+function tableAllCards(cardObj){
+    $('thead').append(`<tr>
+    <th >No</th>
+    <th >Card Pin</th>
+    <th >Serial</th>
+    <th >validity</th>
+    </tr>`);
+    for(let i = 0; i< cardObj.length; i++){
+
+       $('tbody').append(`<tr id='card'>
+       <td rowspan='2' scope='rowgroup' id='id' > ${cardObj[i].id}  </td>
+      <td id="pin" >${cardObj[i].pin}</td>
+       <td id="sn">${cardObj[i].sn}</td>
+      <td id= 'validity${i}'>${cardObj[i].validity.toString()}</td></tr>
+      <tr id='update'>
+      <td scope = "row">&nbsp;</td>
+      <td> <button class="btn bg-success" id="updatebutton">update</button></td>
+      <td><button class="btn bg-danger " id="trash">trash</button></td> </tr>`);
+      var cardD = cardObj[i].validity.toString();
+      validityCheck(cardD, i);
+    }
+}
 
 
 
