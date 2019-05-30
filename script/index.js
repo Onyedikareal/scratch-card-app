@@ -58,8 +58,6 @@ function postCardData(url, data, method, myFunct) {
   }
 
   function generateCard(cardObject){
-    
-    console.log(cardObject);
 
     fillTable(cardObject);
     var cardDate = cardObject.validity.toString();
@@ -106,8 +104,8 @@ function fillTable(cardObj){
    <td id= "validity${cardObj.id}">${cardObj.validity}</td></tr>
    <tr id='update'>
    <td scope = "row">&nbsp;</td>
-   <td> <button class="btn bg-success" id="updatebutton">update</button></td>
-   <td><button class="btn bg-danger " id="trash">trash</button></td> </tr>`);
+   <td> <button type = "button" class="btn bg-success" data-toggle="modal" id="updatebutton" data-target="#exampleModal" data-whatever="SN"  value = "${cardObj.id}">update</button></td>
+   <td><button class="btn bg-danger " id="trash" value=${cardObj.id}>trash</button></td> </tr>`);
 }
 
  
@@ -128,6 +126,10 @@ function validityCheck(cardDateString, i){
 
 
 
+function getall(cards){
+    allCards = JSON.parse(cards);
+    tableAllCards(allCards);
+}
 $('#getall').click(function(){
     $('#table').removeClass('d-none');
     $('tbody').text('');
@@ -135,10 +137,7 @@ $('#getall').click(function(){
     var data;
     postCardData('http://localhost:3000/card', data,'GET', getall);
 
-    function getall(cards){
-        allCards = JSON.parse(cards);
-        tableAllCards(allCards);
-    }
+    
 })
 
 function tableAllCards(cardObj){
@@ -157,8 +156,8 @@ function tableAllCards(cardObj){
       <td id= 'validity${i}'>${cardObj[i].validity.toString()}</td></tr>
       <tr id='update'>
       <td scope = "row">&nbsp;</td>
-      <td> <button class="btn bg-success" id="updatebutton">update</button></td>
-      <td><button class="btn bg-danger " id="trash">trash</button></td> </tr>`);
+      <td> <button type = "button" class="btn bg-success" id="updatebutton" data-toggle="modal" data-target="#exampleModal" data-whatever="SN" value = "${cardObj[i].id}">update</button></td>
+      <td><button class="btn bg-danger trash " id="trash" value ="${cardObj[i].id}">trash</button></td> </tr>`);
       var cardD = cardObj[i].validity.toString();
       validityCheck(cardD, i);
     }
@@ -187,3 +186,19 @@ $('#getone').click(function(){
 
 
 
+$('#tbody').on('click', '#trash',  function(){
+    var trashid =$(this).val();
+
+    data =null;
+    postCardData('http://localhost:3000/card/'+ trashid, data,'DELETE', getone);
+    function getone(re){
+        alert('Done');
+        $('#table').removeClass('d-none');
+        $('tbody').text('');
+        $('thead').text('');
+        var data;
+        postCardData('http://localhost:3000/card', data,'GET', getall);
+    }
+})
+
+  
