@@ -37,18 +37,22 @@ function cardObjGenerator(){
     };
 }
 
-function postCardData(url, data, myFunct) {
+function postCardData(url, data, method, myFunct) {
     var xhttp = new XMLHttpRequest();
    
     xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 201) {
+      if ((this.readyState == 4 && this.status == 201) ||( this.readyState == 4 && this.status == 200)) {
         myFunct(this.responseText);
       }
     };
-    xhttp.open("POST", url, true);
+    xhttp.open(method, url, true);
     xhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhttp.setRequestHeader("Content-type", "application/json");
+    if(data){
     xhttp.send(data);
+    }else{
+        xhttp.send();
+    }
   }
 
   function fillTable(cardObj){
@@ -62,21 +66,21 @@ function postCardData(url, data, myFunct) {
     </tr>`);
    
 
-    $('tbody').append("<tr id='card'></tr>");
     
-    var td1 = `<th rowspan='2' scope='rowgroup' id='id' > ${cardObj.id}  </td>`;
-    var td2 =  `<td id="pin" >${cardObj.pin}</td>`;
-    var td3 = `<td id="sn">${cardObj.sn}</td>`
-    var td4 = `<td id = "validity">${cardObj.validity}</th>`
-    $('tbody #card').append(td1, td2, td3,td4);
-   
-    let td5 = `<td scope = "row">&nbsp;</td>`;
-    let td6 = `<td> <button class="btn bg-success" id="updatebutton">update</button></td>`;
-    let td7 =`<td><button class="btn bg-danger " id="trash">trash</button></td>`;
-    $('tbody').append("<tr id='update'></tr>")
-    $('tbody #update').append(td5,td6,td7);
+    
+    $('tbody').append(`<tr id='card'>
+    <td rowspan='2' scope='rowgroup' id='id' > ${cardObj.id}  </td>
+   <td id="pin" >${cardObj.pin}</td>
+    <td id="sn">${cardObj.sn}</td>
+   <td id= "validity${cardObj.id}">${cardObj.validity}</td></tr>
+   <tr id='update'>
+   <td scope = "row">&nbsp;</td>
+   <td> <button class="btn bg-success" id="updatebutton">update</button></td>
+   <td><button class="btn bg-danger " id="trash">trash</button></td> </tr>`);
 }
-function validityCheck(cardDateString){
+
+ 
+function validityCheck(cardDateString, i){
     var currentDate = new Date();
     currentDate = currentDate.toUTCString();
     currentDate = Date.parse(currentDate);
@@ -84,31 +88,38 @@ function validityCheck(cardDateString){
     cardDate = Date.parse(cardDateString)
     value = +currentDate >= +cardDate
     if(value){
-        $('#validity').addClass('invalid');
+        $(`#validity${i}`).addClass('invalid');
     }else{
-        $('#validity').addClass('valid');
+        $(`#validity${i}`).addClass('valid');
     }
 }
 
   
 $('#generate').click(function(){
     $('#table').removeClass('d-none');
-    $('tbody').text('');
+    $('#validity').removeClass('invalid valid')
     $('thead').text('');
     var cardObj = cardObjGenerator();
     var data = JSON.stringify(cardObj);
-    postCardData('http://localhost:3000/card', data, generateCard);
-    var cardObject
+    postCardData('http://localhost:3000/card', data,'POST', generateCard);
+    var cardObject;
     function generateCard(cardString){
         cardObject = JSON.parse(cardString);
 
         fillTable(cardObject);
         var cardDate = cardObject.validity.toString();
-        validityCheck(cardDate);
+        var id = cardObject.id
+        validityCheck(cardDate, id);
 
     }
 
 });
+
+
+
+
+
+
 
 
 
