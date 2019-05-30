@@ -1,12 +1,19 @@
+body{
+    position: relative;
+}
 #container{
     margin-top: 20px;
     padding: 10px;
     padding-top: 30px;
     position: absolute;
     top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    left: 25%;
+    
+    
+    
+}
+#innercontainer{
+    
 }
 
 h1{
@@ -20,9 +27,9 @@ button {
     margin: 10px;
 }
 #card-details{
-    margin-left: 10px;
-    margin-right: 10px;
+    
     padding: 10px;
+    text-align: center;
 }
 .bj{
     margin: auto;
@@ -33,7 +40,8 @@ table{
     border-collapse: collapse;
     border: 1px solid  #868e96;
     letter-spacing: 1px;
-    font-size: 0.83m
+    font-size: 0.83m;
+    margin: 0 auto;
 }
 
 td, th{
@@ -45,4 +53,14 @@ td, th{
     border: none;
 }
 
+.valid{
+    color: lightgreen;
+}
 
+.invalid{
+    color: red;
+}
+
+#validity:hover{
+    color: lightblue;
+}
