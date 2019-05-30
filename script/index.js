@@ -117,7 +117,18 @@ $('#generate').click(function(){
 
 
 
+$('#getall').click(function(){
+    $('#table').removeClass('d-none');
+    $('tbody').text('');
+    $('thead').text('');
+    var data;
+    postCardData('http://localhost:3000/card', data,'GET', getall);
 
+    function getall(cards){
+        allCards = JSON.parse(cards);
+        tableAllCards(allCards);
+    }
+})
 
 
 
