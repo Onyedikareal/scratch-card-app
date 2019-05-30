@@ -1,20 +1,13 @@
 body{
     position: relative;
 }
-#container{
-    margin-top: 20px;
+#innercontainer{
+    margin: 0 auto;
     padding: 10px;
     padding-top: 30px;
     position: absolute;
-    top: 0;
-    left: 25%;
     
-    
-    
-}
-#innercontainer{
-    
-}
+    }
 
 h1{
     margin: 20px;
@@ -58,7 +51,7 @@ td, th{
 }
 
 .invalid{
-    color: red;
+    color: lightsalmon;
 }
 
 #validity:hover{
