@@ -7,42 +7,39 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     </head>
-    <body>
+    <body >
         <div id="container"  class= " container bg-secondary text-white-50">
+            <div class="container bg-secondary" id="innercontainer">
                 <h1 class="jumbotron bg-transparent border border-white">Welcome to my scratch card app</h1>
                 <div class="row bj">
                 <div class="col-2"></div>
-                <button class="btn bg-info text-white col-4">Generate Pin</button>
-                <button class="btn bg-info text-white col-4">Get all</button>
+                <button class="btn bg-info text-white col-4" id="generate">Generate Pin</button>
+                <button class="btn bg-info text-white col-4" id="getall">Get all</button>
                 </div>
                 <div class="row bj">
                     <div class="col-3"></div>
                 <form action="get" class="col-6">
                     <div class="form-group ">
-                            <input class="form-control " name="search" type="text" placeholder="search with card SN">
+                            <input class="form-control " name="search" type="text" placeholder="search with card SN" id="find">
                             <small class="form-text">please use card serial number</small>
-                            <button class="btn rounded-pill bg-warning text-white d-inline">find card</button>
+                            <button class="btn rounded-pill bg-warning text-white" id="getone">find card</button>
                     </div>   
                 </form>
                 </div>
-                <div class="container" id="card-detail">
+                <div  id="card-detail">
 
-                   <table>
+                   <table class="d-none" id="table">
                        <thead>
-                            <tr>
-                                <th >No</th>
-                                <th >Card Pin</th>
-                                <th >Serial</th>
-                                <th >validity</th>
-                            </tr>
+                            
                         </thead>
                         <tbody>
-                            
+                           
                         </tbody>
                    </table>
                         
                 </div>
                 
+        </div>
         </div>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
