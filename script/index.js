@@ -190,8 +190,8 @@ $('#tbody').on('click', '#trash',  function(){
     var trashid =$(this).val();
 
     data =null;
-    postCardData('http://localhost:3000/card/'+ trashid, data,'DELETE', getone);
-    function getone(re){
+    postCardData('http://localhost:3000/card/'+ trashid, data,'DELETE', trashone);
+    function trashone(trash){
         alert('Done');
         $('#table').removeClass('d-none');
         $('tbody').text('');
@@ -213,6 +213,29 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     modal.find('#serialmodal').val(recipient)
   })
 
- 
+  $('#confirm').click(function(){
+    var id = button.val()
+    var serialn = $('#serialmodal').val();
+    var vali = $('#validitymodal').val();
+    var pin = $('#pinmodal').val();
+    var date = new Date(vali);
+    date = date.toUTCString();
 
- 
+    editWith = {
+        pin: pin,
+        validity: date,
+        sn : serialn
+    };
+    var data = JSON.stringify(editWith);
+     postCardData('http://localhost:3000/card/'+id, data,'PUT', upDatefeedback);
+     function upDatefeedback(updateData){
+       data = JSON.parse(updateData)
+     alert(`Scratch card with the id : ${data.id} has been updated with serial no: ${data.sn}, validity : ${data.validity} and pin: ${data.pin}. Click Ok to see the update`);
+     $('#table').removeClass('d-none');
+     $('tbody').text('');
+     $('thead').text('');
+     var data;
+     postCardData('http://localhost:3000/card', data,'GET', getall);
+     }
+    
+})
