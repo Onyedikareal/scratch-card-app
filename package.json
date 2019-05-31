@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/Onyedikareal/scratch-card-app/issues"
   },
-  "homepage": "https://github.com/Onyedikareal/scratch-card-app#readme"
+  "homepage": "https://github.com/Onyedikareal/scratch-card-app#readme",
+  "dependencies": {
+    "json-server": "^0.15.0",
+    "xmlhttprequest": "^1.8.0"
+  }
 }
