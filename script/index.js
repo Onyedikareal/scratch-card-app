@@ -104,8 +104,8 @@ function fillTable(cardObj){
    <td id= "validity${cardObj.id}">${cardObj.validity}</td></tr>
    <tr id='update'>
    <td scope = "row">&nbsp;</td>
-   <td> <button type = "button" class="btn bg-success" data-toggle="modal" id="updatebutton" data-target="#exampleModal" data-whatever="SN"  value = "${cardObj.id}">update</button></td>
-   <td><button class="btn bg-danger " id="trash" value=${cardObj.id}>trash</button></td> </tr>`);
+   <td> <button type = "button" class="btn bg-success" data-toggle="modal" id="updatebutton" data-target="#updatemodal" data-whatever="SN"  value = "${cardObj.id}">update</button></td>
+   <td><button type = "button" class="btn bg-danger " id="trash" value="${cardObj.id}" data-toggle="modal" data-target="#trashmodal"  >trash</button></td> </tr>`);
 }
 
  
@@ -156,8 +156,8 @@ function tableAllCards(cardObj){
       <td id= 'validity${i}'>${cardObj[i].validity.toString()}</td></tr>
       <tr id='update'>
       <td scope = "row">&nbsp;</td>
-      <td> <button type = "button" class="btn bg-success" id="updatebutton" data-toggle="modal" data-target="#exampleModal" data-whatever="SN" value = "${cardObj[i].id}">update</button></td>
-      <td><button class="btn bg-danger trash " id="trash" value ="${cardObj[i].id}">trash</button></td> </tr>`);
+      <td> <button type = "button" class="btn bg-success" id="updatebutton" data-toggle="modal" data-target="#updatemodal" data-whatever="SN" value = "${cardObj[i].id}">update</button></td>
+      <td><button type = "button" class="btn bg-danger trash " id="trash" value ="${cardObj[i].id}" data-toggle="modal" data-target="#trashmodal" >trash</button></td> </tr>`);
       var cardD = cardObj[i].validity.toString();
       validityCheck(cardD, i);
     }
@@ -184,25 +184,41 @@ $('#getone').click(function(){
     }
 })
 
+var trashbutton;
+
+$('#trashmodal').on('show.bs.modal', function (event) {
+    trashbutton = $(event.relatedTarget) // Button that triggered the modal
+    
+    
+    
+    var modal = $(this)
+
+  })
 
 
-$('#tbody').on('click', '#trash',  function(){
-    var trashid =$(this).val();
 
-    data =null;
-    postCardData('http://localhost:3000/card/'+ trashid, data,'DELETE', trashone);
-    function trashone(trash){
-        alert('Done');
+
+$('#confirmtrash').click(function(){
+    var trashid = trashbutton.val()
+    data = null;
+    
+     postCardData('http://localhost:3000/card/'+trashid, data,'DELETE', trashone);
+     function trashone(trash){
+        
         $('#table').removeClass('d-none');
         $('tbody').text('');
         $('thead').text('');
         var data;
         postCardData('http://localhost:3000/card', data,'GET', getall);
     }
+    
 })
 
+
+
+
 var button;
-$('#exampleModal').on('show.bs.modal', function (event) {
+$('#updatemodal').on('show.bs.modal', function (event) {
     button = $(event.relatedTarget) // Button that triggered the modal
     
     var recipient = button.data('whatever') // Extract info from data-* attributes
@@ -240,3 +256,4 @@ $('#exampleModal').on('show.bs.modal', function (event) {
      }
     
 })
+
