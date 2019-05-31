@@ -3,7 +3,7 @@
 
 An app that manages telecommunication recharge card
 
-### things the app can do
+## things the app can do
 
 generate a card with details like pin, serial number, and validity
 
