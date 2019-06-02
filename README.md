@@ -13,4 +13,4 @@ update a particular card
 
 search for a particular card
 
-get all cards listed on the page
+get all cards with their details listed on the page
